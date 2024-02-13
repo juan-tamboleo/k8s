@@ -1,0 +1,18 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: alpine-deployment
+spec:
+  replicas: 2 # Para indicar los Pods que queremos que sigan esta especificación
+  selector: # Para relacionar el Deployment con el Pod, se utiliza una clava - valor
+    matchLabels:
+      app: alpine
+  template:
+    metadata:
+      labels:
+        app: alpine # Misma clave valor que en selector
+    spec:
+      containers:
+      - name: alpine
+        image: alpine:latest
+        command: ["sleep", "infinity"]

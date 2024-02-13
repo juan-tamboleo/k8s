@@ -1,0 +1,9 @@
+apiVersion: v1 # Versión que se va utilizar. Con pods y services se utiliza v1, con deployments y statefulsets se usa apps/v1 y con jobs y cronjobs batch/v1
+kind: Pod # Indicamos el tipo de objeto que queremos crear, en este caso un pod
+metadata: # Información adicional
+  name: alpine # El nombre del pod
+spec: # Especificaciones del objeto a crear
+  containers: # Información sobre el contenedor que va a estar en el pod
+  - name: alpine # Nombre del contenedor
+    image: alpine:latest # Imagen a usar
+    command: ['sleep', 'infinity'] # Comando que debe ejecutar cuando se lance

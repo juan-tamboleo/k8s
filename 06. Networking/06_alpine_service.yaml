@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: alpine
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: alpine
+  template:
+    metadata:
+      labels: 
+        app: alpine
+    spec:
+      containers:
+      - name: alpine
+        image: alpine:latest
+        ports:
+        - containerPort: 8000 # Puerto que se va a exponer
+---
+apiVersion: v1
+kind: Service # Nuevo tipo
+metadata:
+  name: alpine
+spec:
+  selector:
+    app: alpine # De nuevo hay que utilizar los selector para relacionar
+  ports:
+  - protocol: TCP
+    port: 8000
+    targetPort: 8000
+  type: ClusterIP # Tipo de servicio a utilizar

@@ -1,0 +1,59 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: alpine-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: alpine
+  template:
+    metadata:
+      labels: 
+        app: alpine
+    spec:
+      containers:
+      - name: alpine
+        image: alpine:latest
+        ports:
+        - containerPort: 8000
+        env:
+        - name: DATABASE_URL
+          valueFrom:
+            configMapKeyRef:
+              name: alpine-configmap
+              key: alpine_url
+        volumeMounts:
+        - name: alpine-pv
+          mountPath: /home/alpine
+      volumes:
+        - name: alpine-pv
+          persistentVolumeClaim:
+            claimName: alpine-pv-claim
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: alpine-service
+spec:
+  selector:
+    app: alpine
+  ports:
+  - protocol: TCP
+    port: 8000
+    targetPort: 8000
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: alpine-pv-claim
+  labels:
+    app: alpine
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 300M
