@@ -3,6 +3,12 @@
 ## Instalación
 
 - [Docker](https://docs.docker.com/engine/install/ubuntu/#install-using-the-repository)
+    -  **IMPORTANTE**: [post-installation](https://docs.docker.com/engine/install/linux-postinstall/)
+    1. `sudo groupadd docker`
+    2. `sudo usermod -aG docker $USER`
+    3. `newgrp docker`
+    4. `docker run hello-world`
+        - Si este comando se ejecuta sin problemas ya tendrían que haber aplicado los cambios 🫡.
 - [Kubectl](https://docs.docker.com/engine/install/ubuntu/#install-using-the-repository)
 - [Minikube](https://minikube.sigs.k8s.io/docs/start/)
 
@@ -12,6 +18,7 @@
 - START
     - minikube start \[flags\]
     - minikube start -n|--nodes 2
+    - **IMPORTANTE**. Utilizar minikube start con la opción --driver=docker. `minikube start --driver=docker`
 - STOP
     - minikube stop \[flags\]
 - DELETE
