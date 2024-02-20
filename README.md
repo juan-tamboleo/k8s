@@ -8,7 +8,7 @@
     2. `sudo usermod -aG docker $USER`
     3. `newgrp docker`
     4. `docker run hello-world`
-        - Si este comando se ejecuta sin problemas ya tendrían que haber aplicado los cambios 🫡.
+        - Si este comando se ejecuta sin problemas, ya se tendrían que haber aplicado los cambios 🫡.
 - [Kubectl](https://docs.docker.com/engine/install/ubuntu/#install-using-the-repository)
 - [Minikube](https://minikube.sigs.k8s.io/docs/start/)
 
